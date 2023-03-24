@@ -3,13 +3,14 @@ const express = require("express");
 const cors = require("cors");
 const connect = require("./config/db");
 const app = express();
-
+const User = require('./routes/user.route')
 const PORT = process.env.PORT || 8001;
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use('/user', User)
 
 app.get("/", (req, res) => {
   res.send("This is  My Es PayPal backend");
@@ -17,5 +18,5 @@ app.get("/", (req, res) => {
 
 app.listen(PORT, async () => {
   await connect();
-  console.log(`listening on .....http://localhost:${PORT}`) 
+  console.log(`listening on .....http://localhost:${PORT}`)
 });

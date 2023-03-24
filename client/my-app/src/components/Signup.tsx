@@ -4,7 +4,9 @@ import {
   FormLabel,
   Container,
   Text,
+  useToast,
 } from '@chakra-ui/react'
+import axios from 'axios';
 
 import { useFormik } from 'formik';
 import { FormikHelpers, FormikProps } from 'formik/dist/types';
@@ -20,16 +22,39 @@ const initState: SingupUserState = {
 
 const Signup: FC<SingupProps> = ({ ToggleForm }) => {
 
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const toast = useToast()
   const handleClick = () => setShow(!show);
 
   // Here I am caching my submit function 
-  const handleSignup = useCallback((values: SingupUserState, { resetForm }: FormikHelpers<SingupUserState>): void => {
-    alert("signup successfully")
-    formik.setValues(initState);
-    resetForm();
-    ToggleForm()
-    console.log(formik.values)
+  const handleSignup = useCallback(async (values: SingupUserState, { resetForm }: FormikHelpers<SingupUserState>): Promise<any> => {
+    setLoading(true)
+    try {
+      console.log(values)
+      let { data } = await axios.post("http://localhost:8001/user/register", { ...values, role: "user" })
+      toast({
+        title: data.message,
+        description: "We've created your account for you.",
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+      })
+      setLoading(false)
+      // console.log(formik.values)
+      formik.setValues(initState);
+      resetForm();
+      ToggleForm()
+    } catch {
+      toast({
+        title: 'Something went wrong',
+        description: "Something went wrong",
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+      });
+      setLoading(false);
+    }
   }, [])
 
   const formik: FormikProps<SingupUserState> = useFormik<SingupUserState>({
@@ -39,8 +64,8 @@ const Signup: FC<SingupProps> = ({ ToggleForm }) => {
   });
 
 
-  return ( 
-    <Flex w="100%" h="100%" flexDir={"column"} justifyContent="flex-start" bg={"#cc8bf0"}  className='left-clip' >
+  return (
+    <Flex w="100%" h="100%" flexDir={"column"} justifyContent="flex-start" bg={"#cc8bf0"} className='left-clip' >
       <Heading color={"blackAlpha.800"} ml="60" my="10" >Sign Up</Heading>
       <form onSubmit={formik.handleSubmit} style={{ width: "50%" }}>
         <Container
@@ -110,10 +135,10 @@ const Signup: FC<SingupProps> = ({ ToggleForm }) => {
               </InputRightElement>
             </InputGroup>
             {formik.touched.password && formik.errors.password && <Text color="red.400" fontSize={12} >password is required.</Text>}
-            <Button colorScheme="blue" mt="10" mb="2" w="100%" textAlign={"center"} type="submit">
+            <Button colorScheme="blue" mt="10" mb="2" w="100%" textAlign={"center"} type="submit" isLoading={loading} >
               Register
             </Button>
-            <Text  as='cite'>Already have an Account{' '}
+            <Text as='cite'>Already have an Account{' '}
               <span style={{ color: "hotpink", cursor: 'pointer' }} onClick={ToggleForm}>
                 Login
               </span></Text>

@@ -9,8 +9,9 @@ import {
 import { useFormik } from 'formik';
 import { FormikHelpers, FormikProps } from 'formik/dist/types';
 import { FC, useCallback, useState } from 'react'
-import { SingupvalidationSchema } from '../controller/FormValidation';
-import { SingupProps, LoginUserState } from '../types/user';
+import { LoginvalidationSchema, SingupvalidationSchema } from '../controller/FormValidation';
+import { LogIn } from '../redux/auth/auth.actions';
+import { SingupProps, LoginUserState, useAppDispatch } from '../types/user';
 
 const initState: LoginUserState = {
   email: "",
@@ -19,20 +20,20 @@ const initState: LoginUserState = {
 const Login: FC<SingupProps> = ({ ToggleForm }) => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
-
+  const dispatch = useAppDispatch()
   // Here I am caching my submit function 
-  const handleSignup = useCallback((values: LoginUserState, { resetForm }: FormikHelpers<LoginUserState>): void => {
-    alert("signup successfully")
+  const handleLogin = useCallback((values: LoginUserState, { resetForm }: FormikHelpers<LoginUserState>): void => {
+    console.log(values);
+    dispatch(LogIn(values))
     formik.setValues(initState);
     resetForm();
     ToggleForm()
-    console.log(formik.values)
   }, [])
 
   const formik: FormikProps<LoginUserState> = useFormik<LoginUserState>({
     initialValues: initState,
-    validationSchema: SingupvalidationSchema,
-    onSubmit: handleSignup
+    validationSchema: LoginvalidationSchema,
+    onSubmit: handleLogin
   });
 
 
@@ -93,7 +94,7 @@ const Login: FC<SingupProps> = ({ ToggleForm }) => {
             <Button colorScheme="blue" mt="10" mb="2" w="100%" textAlign={"center"} type="submit">
               Login
             </Button>
-            <Text  as='cite'>Create Account ?{' '}
+            <Text as='cite'>Create Account ?{' '}
               <span style={{ color: "hotpink", cursor: 'pointer' }} onClick={ToggleForm}>
                 Signup
               </span></Text>
