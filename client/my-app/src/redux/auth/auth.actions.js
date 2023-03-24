@@ -7,7 +7,7 @@ export const LogIn = (creds) => async (dispatch) => {
     });
 console.log(creds);
     try {
-        const { data } = await axios.post(`http://localhost:8001/user/login`, creds);
+        const { data } = await axios.post(`https://real-lime-cockroach-tutu.cyclic.app/user/login`, creds);
         console.log(data);
        
         Swal.fire({

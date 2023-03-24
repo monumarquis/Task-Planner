@@ -3,15 +3,24 @@ const { userPrivateRoute } = require('../middlewares/user.auth')
 const app = express.Router()
 const taskModel = require('../models/task.model')
 
-// All Task of a sprint
+// All Task of a user
 app.get("/", userPrivateRoute, async (req, res) => {
-    console.log(req.body);
+    console.log(req.body.user);
+    const myTask = await taskModel.find({ assignBy: req.body.user.email });
+    const assignedtask = await taskModel.find({ assignTo: req.body.user.email });
+    return res.status(201).send({ myTask, assignedtask })
+})
+app.get("/allSprint", userPrivateRoute, async (req, res) => {
+    console.log(req.body.user);
+    const myTask = await taskModel.find();
+
+    return res.status(201).send(myTask)
 })
 
 
 app.post("/", userPrivateRoute, async (req, res) => {
     // console.log(req.body.user);
-    const { name: assignBy } = req.body.user
+    const { email: assignBy } = req.body.user
     const { title, assignTo, desc, status, sprint } = req.body
     console.log({ title, assignTo, desc, status, sprint, assignBy });
     if (!status || !title || !assignTo || !desc || !sprint) return res.status(403).send({ message: "Please Enter All Details" })

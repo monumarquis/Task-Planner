@@ -32,7 +32,7 @@ const Signup: FC<SingupProps> = ({ ToggleForm }) => {
     setLoading(true)
     try {
       console.log(values)
-      let { data } = await axios.post("http://localhost:8001/user/register", { ...values, role: "user" })
+      let { data } = await axios.post("https://real-lime-cockroach-tutu.cyclic.app/user/register", { ...values, role: "user" })
       toast({
         title: data.message,
         description: "We've created your account for you.",

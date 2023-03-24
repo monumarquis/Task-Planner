@@ -1,9 +1,9 @@
+import { MY_TASK_ERROR, MY_TASK_REQUEST, MY_TASK_SUCCESS } from "./myTask.types";
 import axios from "axios";
-import { ALL_SPRINT_ERROR, ALL_SPRINT_REQUEST, ALL_SPRINT_SUCCESS } from "./sprint.types";
 
-export const getAllSprint = () => async (dispatch) => {
+export const getAllMyTask = () => async (dispatch) => {
     dispatch({
-        type: ALL_SPRINT_REQUEST
+        type: MY_TASK_REQUEST
     });
     const config = {
         headers: {
@@ -11,17 +11,17 @@ export const getAllSprint = () => async (dispatch) => {
         }
     }
     try {
-        const { data } = await axios.get(`https://real-lime-cockroach-tutu.cyclic.app/sprint`,config);
-        // console.log(data);
+        const { data } = await axios.get(`https://real-lime-cockroach-tutu.cyclic.app/task`,config);
+        console.log(data);
           return dispatch({
-            type: ALL_SPRINT_SUCCESS,
+            type: MY_TASK_SUCCESS,
             payload: data,
         });
     }
     catch ({ response: { data: { message } } }) {
         console.log(message);
         return dispatch({
-            type: ALL_SPRINT_ERROR,
+            type: MY_TASK_ERROR,
             payload: message,
         });
 

@@ -50,6 +50,20 @@ export type sprintMapProps = {
   updatedAt: string;
   createdAt: string;
 };
+export type taskMapProps = {
+  _id: string;
+  title: string;
+  desc: string;
+  assignTo: string;
+  assignBy: string;
+  sprint: string;
+  status: string;
+  updatedAt: string;
+  createdAt: string;
+};
+
+export type singletaskProps = { data: taskMapProps };
+
 export type userMapProps = {
   _id: string;
   name: string;

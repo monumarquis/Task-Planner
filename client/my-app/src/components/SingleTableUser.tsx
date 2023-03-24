@@ -19,7 +19,7 @@ const SingleTableUser: FC<singlrTableUserProps> = ({ name, id, role, email }) =>
             }
         }
         try {
-            const { data } = await axios.delete(`http://localhost:8001/user/${id}`, config);
+            const { data } = await axios.delete(`https://real-lime-cockroach-tutu.cyclic.app/user/${id}`, config);
             console.log(data)
             toast({
                 title: data.message,
@@ -43,7 +43,7 @@ const SingleTableUser: FC<singlrTableUserProps> = ({ name, id, role, email }) =>
             }
         }
         try {
-            const { data } = await axios.patch(`http://localhost:8001/user`, { userId: id, role: Role }, config);
+            const { data } = await axios.patch(`https://real-lime-cockroach-tutu.cyclic.app/user`, { userId: id, role: Role }, config);
             console.log(data)
             toast({
                 title: data.message,
