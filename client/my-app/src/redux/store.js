@@ -5,11 +5,13 @@ import {
     compose
 } from "redux";
 import thunk from "redux-thunk";
+import { allUserProfileReducer } from "./allUser/allUsers.reducer";
 import { authReducer } from "./auth/auth.reducer";
 
 
 const rootReducer = combineReducers({
     auth: authReducer,
+    allUser:allUserProfileReducer
 });
 
 const createCompose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import Privateroutes from '../components/PrivateRoutes'
+import AllUser from '../pages/AllUser'
 import AssignSprints from '../pages/AssignSprints'
 import AssignTasks from '../pages/AssignTasks'
 import Auth from '../pages/Auth'
@@ -17,7 +18,7 @@ const AllRoutes = () => {
             <Route path='/add-sprint' element={<Privateroutes><AssignSprints /></Privateroutes>}></Route>
             <Route path='/tasks' element={<Privateroutes><Tasks /></Privateroutes>}></Route>
             <Route path='/assign-tasks' element={<Privateroutes><AssignTasks /></Privateroutes>}></Route>
-            <Route path='/report' element={<Privateroutes><Report /></Privateroutes>}></Route>
+            <Route path='/all-users' element={<Privateroutes><AllUser /></Privateroutes>}></Route>
             <Route path='/report' element={<Privateroutes><Report /></Privateroutes>}></Route>
         </Routes>
     )

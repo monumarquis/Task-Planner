@@ -11,17 +11,37 @@ export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export type LoginUserState = {
-  email: String;
-  password: String;
+  email: string;
+  password: string;
+};
+export type mapUserProps = {
+  _id: string;
+  name: string;
+  email: string;
+  role: string;
 };
 export type SingupUserState = {
-  name: String;
-  email: String;
-  password: String;
+  name: string;
+  email: string;
+  password: string;
+};
+
+export type taskAssign = {
+  title: string;
+  assignTo: string;
+  desc: string;
+  sprint: string;
 };
 
 export type SingupProps = { ToggleForm: () => any };
 
 export type privateRouteProps = {
   children: ReactNode;
+};
+
+export type singlrTableUserProps = {
+  name: string;
+  id: string;
+  role: string;
+  email: string;
 };

@@ -1,7 +1,7 @@
 import { object, string } from "yup";
 
 const SingupvalidationSchema = object({
-    name: string().min(5).max(25).required("Please Enter Name"),
+    name: string().min(4, 'Too Short!').max(25).required("Please Enter Name"),
     email: string().email('Invalid email').required('Please Enter Email'),
     password: string().min(2, 'Too Short!').max(50, 'Too Long!').required('Please Enter Password'),
 });
@@ -10,4 +10,11 @@ const LoginvalidationSchema = object({
     password: string().min(2, 'Too Short!').max(50, 'Too Long!').required('Please Enter Password'),
 });
 
-export { SingupvalidationSchema, LoginvalidationSchema }
+const TaskvalidationSchema = object({
+    title: string().min(4, 'Too Short!').max(25).required("Please Enter Task Title"),
+    sprint: string().required('Please Select Sprint'),
+    desc: string().min(2, 'Too Short!').max(250, 'Too Long!').required('Please Enter Desc'),
+    assignTo: string().min(2, 'Too Short!').max(50, 'Too Long!').required('Please Enter Select assignee'),
+});
+
+export { SingupvalidationSchema, LoginvalidationSchema, TaskvalidationSchema }

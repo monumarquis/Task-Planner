@@ -9,7 +9,7 @@ import {
 import { useFormik } from 'formik';
 import { FormikHelpers, FormikProps } from 'formik/dist/types';
 import { FC, useCallback, useState } from 'react'
-import { LoginvalidationSchema, SingupvalidationSchema } from '../controller/FormValidation';
+import { LoginvalidationSchema } from '../controller/FormValidation';
 import { LogIn } from '../redux/auth/auth.actions';
 import { SingupProps, LoginUserState, useAppDispatch } from '../types/user';
 
