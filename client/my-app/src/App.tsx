@@ -1,9 +1,11 @@
+import AllRoutes from './AllRoutes/Allroutes';
 import './App.css';
-import Auth from './pages/Auth';
+import Sidebar from './pages/Sidebar';
 const App = () => {
   return (
     <div className="App" >
-      <Auth />
+      <Sidebar />
+      <AllRoutes />
     </div>
   );
 }

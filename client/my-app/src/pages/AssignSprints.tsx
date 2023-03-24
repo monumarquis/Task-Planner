@@ -1,12 +1,11 @@
-import { Flex } from '@chakra-ui/react'
 import { FC } from 'react'
-
-const Dashboard: FC = () => {
+import { Flex } from '@chakra-ui/react'
+const AssignSprints: FC = () => {
     return (
         <Flex flexDirection="column" border={"1px solid black"} w="80%" ml="auto" bg="red" >
-           Sprint
+            AssignSprint
         </Flex>
     )
 }
 
-export default Dashboard
+export default AssignSprints

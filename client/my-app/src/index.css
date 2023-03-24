@@ -50,3 +50,8 @@ code {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
+
+#tab a.active {
+  color: rgb(255, 255, 255);
+  font-size: larger;
+}

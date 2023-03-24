@@ -18,8 +18,8 @@ const initState: LoginUserState = {
   password: "",
 };
 const Login: FC<SingupProps> = ({ ToggleForm }) => {
-  const [show, setShow] = useState(false);
-  const handleClick = () => setShow(!show);
+  const [show, setShow] = useState<boolean>(false);
+  const handleClick = (): void => setShow(!show);
   const dispatch = useAppDispatch()
   // Here I am caching my submit function 
   const handleLogin = useCallback((values: LoginUserState, { resetForm }: FormikHelpers<LoginUserState>): void => {
