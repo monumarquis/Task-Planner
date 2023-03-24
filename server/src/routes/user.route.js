@@ -24,7 +24,7 @@ app.get("/Search/:user", adminPrivateRoute, async (req, res) => {
 
 // All Users Profile route
 app.get('/', adminPrivateRoute, async (req, res) => {
-    const user = await userModel.find();
+    const user = await userModel.find({},{ password: 0});
     return res.status(201).send(user)
 })
 

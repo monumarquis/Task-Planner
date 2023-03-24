@@ -35,7 +35,7 @@ export const getAllUserProfileBySearch = (user) => async (dispatch) => {
         }
     }
     try {
-        const { data } = await axios.get(`https://aquamarine-piranha-gear.cyclic.app/Search/${user}`,config);
+        const { data } = await axios.get(`http://localhost:8001/Search/${user}`,config);
         // console.log(data);
           return dispatch({
             type: ALL_USER_PROFILE_SUCCESS,

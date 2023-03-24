@@ -31,12 +31,32 @@ export type taskAssign = {
   assignTo: string;
   desc: string;
   sprint: string;
+  status: string;
 };
 export type sprintAssign = {
   title: string;
   desc: string;
   startDate: string;
   endDate: string;
+};
+export type sprintMapProps = {
+  _id: string;
+  title: string;
+  desc: string;
+  startDate: string;
+  endDate: string;
+  creatorEmail: string;
+  creatorName: string;
+  updatedAt: string;
+  createdAt: string;
+};
+export type userMapProps = {
+  _id: string;
+  name: string;
+  email: string;
+  role: string;
+  updatedAt: string;
+  createdAt: string;
 };
 
 export type SingupProps = { ToggleForm: () => any };

@@ -6,28 +6,72 @@ import {
     Text,
     Select,
     Textarea,
+    useToast,
 } from '@chakra-ui/react'
+import axios from 'axios';
 
 import { useFormik } from 'formik';
 import { FormikHelpers, FormikProps } from 'formik/dist/types';
-import { FC, useCallback } from 'react'
+import { FC, useCallback, useEffect, useState } from 'react'
 import { TaskvalidationSchema } from '../controller/FormValidation';
-import { taskAssign } from '../types/user';
+import { getAllUserProfile } from '../redux/allUser/allUsers.actions';
+import { getAllSprint } from '../redux/sprint/sprint.actions';
+import { sprintMapProps, taskAssign, useAppDispatch, useAppSelector, userMapProps } from '../types/user';
 
 const initState: taskAssign = {
     title: "",
     sprint: "",
     desc: "",
-    assignTo: ""
+    assignTo: "",
+    status: "",
 };
 
 const AssignTasks: FC = () => {
-
-    const handleTaskPost = useCallback((values: taskAssign, { resetForm }: FormikHelpers<taskAssign>): void => {
+    const { data: allsprints } = useAppSelector((state) => state.allSprints)
+    const { data: allusers } = useAppSelector((state) => state.allUser)
+    const [loading, setLoading] = useState<boolean>(false);
+    const toast = useToast()
+    const dispatch = useAppDispatch()
+    // console.log(allsprints);
+    // console.log(allusers);
+    const handleTaskPost = useCallback(async (values: taskAssign, { resetForm }: FormikHelpers<taskAssign>): Promise<any> => {
         console.log(values);
-        formik.setValues(initState);
-        resetForm();
+        const config = {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        }
+        try {
+            console.log(values)
+            let { data } = await axios.post("http://localhost:8001/task", { ...values }, config)
+            toast({
+                title: data.message,
+                description: "You've created Task",
+                status: 'success',
+                duration: 2000,
+                isClosable: true,
+            })
+            setLoading(false)
+            // console.log(formik.values)
+            formik.setValues(initState);
+            resetForm();
+        } catch {
+            toast({
+                title: 'Name Already Taken',
+                description: "Something went wrong",
+                status: 'error',
+                duration: 2000,
+                isClosable: true,
+            });
+            setLoading(false);
+        }
     }, [])
+
+    useEffect(() => {
+        dispatch(getAllUserProfile())
+        dispatch(getAllSprint())
+    }, [])
+
 
     const formik: FormikProps<taskAssign> = useFormik<taskAssign>({
         initialValues: initState,
@@ -35,7 +79,7 @@ const AssignTasks: FC = () => {
         onSubmit: handleTaskPost
     });
     return (
-        <Flex flexDirection="column" border={"1px solid black"} w="80%" ml="auto"  >
+        <Flex flexDirection="column" w="80%" ml="auto"  >
             <form onSubmit={formik.handleSubmit} style={{ width: "90%", margin: "auto", marginTop: "20px" }} >
                 <Container
                     maxW="100%"
@@ -46,25 +90,41 @@ const AssignTasks: FC = () => {
                 >
                     <FormControl py="10" >
                         <Flex flexDirection="row" justifyContent={"space-between"} w="100%"  >
-                            <Flex flexDirection="column" w="49%" >
+                            <Flex flexDirection="column" w="33%" >
                                 <FormLabel fontWeight="700" mb="1" mt="5">
                                     Sprint
                                 </FormLabel>
                                 <Select name="sprint" variant="outline" placeholder='Select Sprint' value={formik.values?.sprint.toString()} onBlur={formik.handleBlur} onChange={formik.handleChange} >
-                                    <option value='option1'>Option 1</option>
-                                    <option value='option2'>Option 2</option>
+
+                                    {
+                                        allsprints && allsprints.length > 0 && allsprints.map((el: sprintMapProps) => <option value={el._id}>{el.title}</option>)
+                                    }
                                 </Select>
                                 {formik.touched.sprint && formik.errors.sprint && <Text color="red.400" fontSize={12} >sprint is required.</Text>}
                             </Flex>
-                            <Flex flexDirection="column" w="49%">
+                            <Flex flexDirection="column" w="33%">
                                 <FormLabel fontWeight="700" mb="1" mt="5">
                                     Assignee
                                 </FormLabel>
-                                <Select name="assignTo" variant="outline" placeholder='Select Assignee' value={formik.values?.assignTo.toString()}  onBlur={formik.handleBlur} onChange={formik.handleChange} >
-                                    <option value='option1'>Option 1</option>
-                                    <option value='option2'>Option 2</option>
+                                <Select name="assignTo" variant="outline" placeholder='Select Assignee' value={formik.values?.assignTo.toString()} onBlur={formik.handleBlur} onChange={formik.handleChange} >
+                                    {/* <option value='option1'>Option 1</option>
+                                    <option value='option2'>Option 2</option> */}
+                                    {
+                                        allusers && allusers.length > 0 && allusers.map((el: userMapProps) => <option value={el.email}>{el.email}</option>)
+                                    }
                                 </Select>
                                 {formik.touched.assignTo && formik.errors.assignTo && <Text color="red.400" fontSize={12} >assignee is required.</Text>}
+                            </Flex>
+                            <Flex flexDirection="column" w="33%">
+                                <FormLabel fontWeight="700" mb="1" mt="5">
+                                    Status
+                                </FormLabel>
+                                <Select name="status" variant="outline" placeholder='Select Status' value={formik.values?.status.toString()} onBlur={formik.handleBlur} onChange={formik.handleChange} >
+                                    <option value='Pending'>Pending</option>
+                                    <option value='Progress'>Progress</option>
+                                    <option value='Completed'>Completed</option>
+                                </Select>
+                                {formik.touched.status && formik.errors.status && <Text color="red.400" fontSize={12} >status is required.</Text>}
                             </Flex>
                         </Flex>
                         <Flex flexDirection="column" w="100%">

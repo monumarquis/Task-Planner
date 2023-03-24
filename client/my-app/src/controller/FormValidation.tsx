@@ -13,6 +13,7 @@ const LoginvalidationSchema = object({
 const TaskvalidationSchema = object({
     title: string().min(4, 'Too Short!').max(25).required("Please Enter Task Title"),
     sprint: string().required('Please Select Sprint'),
+    status: string().required('Please Select status'),
     desc: string().min(2, 'Too Short!').max(250, 'Too Long!').required('Please Enter Desc'),
     assignTo: string().min(2, 'Too Short!').max(50, 'Too Long!').required('Please Enter Select assignee'),
 });

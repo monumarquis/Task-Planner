@@ -5,27 +5,58 @@ import {
     Container,
     Text,
     Textarea,
+    useToast,
 } from '@chakra-ui/react'
+import axios from 'axios';
 
 import { useFormik } from 'formik';
 import { FormikHelpers, FormikProps } from 'formik/dist/types';
-import { FC, useCallback } from 'react'
+import { FC, useCallback, useState } from 'react'
 import { sprintvalidationSchema } from '../controller/FormValidation';
-import { sprintAssign } from '../types/user';
+import { sprintAssign, useAppDispatch, useAppSelector } from '../types/user';
 
 const initState: sprintAssign = {
     endDate: "",
     startDate: "",
     desc: "",
     title: "",
+
 }
 
 const AssignSprints: FC = () => {
 
-    const handleSprintPost = (values: sprintAssign, { resetForm }: FormikHelpers<sprintAssign>): void => {
-        console.log(values);
-        // formik.setValues(initState);
-        resetForm();
+    const [loading, setLoading] = useState<boolean>(false);
+    const toast = useToast()
+    const handleSprintPost = async (values: sprintAssign, { resetForm }: FormikHelpers<sprintAssign>): Promise<any> => {
+        const config = {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        }
+        try {
+            console.log(values)
+            let { data } = await axios.post("http://localhost:8001/sprint", { ...values }, config)
+            toast({
+                title: data.message,
+                description: "You've Added New Sprint",
+                status: 'success',
+                duration: 2000,
+                isClosable: true,
+            })
+            setLoading(false)
+            // console.log(formik.values)
+            formik.setValues(initState);
+            resetForm();
+        } catch {
+            toast({
+                title: 'title Already Taken',
+                description: "Something went wrong",
+                status: 'error',
+                duration: 2000,
+                isClosable: true,
+            });
+            setLoading(false);
+        }
     }
     const formik: FormikProps<sprintAssign> = useFormik<sprintAssign>({
         initialValues: initState,
@@ -54,7 +85,7 @@ const AssignSprints: FC = () => {
                                 type='text'
                                 onChange={formik.handleChange}
                                 value={formik.values?.title.toString()}
-                                placeholder="Enter Task Title"
+                                placeholder="Enter Sprint Title"
                                 variant="outline"
                                 isInvalid={formik.touched.title && Boolean(formik.errors.title)}
                                 onBlur={formik.handleBlur}
