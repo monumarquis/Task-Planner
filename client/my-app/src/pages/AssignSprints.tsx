@@ -1,9 +1,129 @@
-import { FC } from 'react'
-import { Flex } from '@chakra-ui/react'
+import {
+    Button, Flex, Input,
+    FormControl,
+    FormLabel,
+    Container,
+    Text,
+    Textarea,
+} from '@chakra-ui/react'
+
+import { useFormik } from 'formik';
+import { FormikHelpers, FormikProps } from 'formik/dist/types';
+import { FC, useCallback } from 'react'
+import { sprintvalidationSchema } from '../controller/FormValidation';
+import { sprintAssign } from '../types/user';
+
+const initState: sprintAssign = {
+    endDate: "",
+    startDate: "",
+    desc: "",
+    title: "",
+}
+
 const AssignSprints: FC = () => {
+
+    const handleSprintPost = (values: sprintAssign, { resetForm }: FormikHelpers<sprintAssign>): void => {
+        console.log(values);
+        // formik.setValues(initState);
+        resetForm();
+    }
+    const formik: FormikProps<sprintAssign> = useFormik<sprintAssign>({
+        initialValues: initState,
+        validationSchema: sprintvalidationSchema,
+        onSubmit: handleSprintPost
+    });
+
+
     return (
-        <Flex flexDirection="column" border={"1px solid black"} w="80%" ml="auto" bg="red" >
-            AssignSprint
+        <Flex flexDirection="column" w="80%" ml="auto" >
+            <form onSubmit={formik.handleSubmit} style={{ width: "90%", margin: "auto", marginTop: "20px" }} >
+                <Container
+                    maxW="100%"
+                    mb="10"
+                    borderRadius="20"
+                    background={"#fff"}
+                    centerContent
+                >
+                    <FormControl py="10" >
+                        <Flex flexDirection="column" w="100%" >
+                            <FormLabel fontWeight="700" mb="1" mt="5">
+                                Sprint Title
+                            </FormLabel>
+                            <Input
+                                name='title'
+                                type='text'
+                                onChange={formik.handleChange}
+                                value={formik.values?.title.toString()}
+                                placeholder="Enter Task Title"
+                                variant="outline"
+                                isInvalid={formik.touched.title && Boolean(formik.errors.title)}
+                                onBlur={formik.handleBlur}
+                                pl="3"
+
+                            />
+                            {formik.touched.title && formik.errors.title && <Text color="red.400" fontSize={12} >title is required.</Text>}
+                        </Flex>
+                        <Flex flexDirection="row" w="100%" justifyContent={"space-between"} >
+                            <Flex flexDirection="column" w="49%" >
+                                <FormLabel fontWeight="700" mb="1" mt="5">
+                                    Start date
+                                </FormLabel>
+                                <Input
+                                    name='startDate'
+                                    type='datetime-local'
+                                    onChange={formik.handleChange}
+                                    value={formik.values?.startDate.toString()}
+                                    variant="outline"
+                                    isInvalid={formik.touched.startDate && Boolean(formik.errors.startDate)}
+                                    onBlur={formik.handleBlur}
+                                    pl="3"
+
+                                />
+                                {formik.touched.startDate && formik.errors.startDate && <Text color="red.400" fontSize={12} >start date is required.</Text>}
+                            </Flex>
+                            <Flex flexDirection="column" w="49%">
+                                <FormLabel fontWeight="700" mb="1" mt="5">
+                                    End date
+                                </FormLabel>
+                                <Input
+                                    name='endDate'
+                                    type='datetime-local'
+                                    onChange={formik.handleChange}
+                                    value={formik.values?.endDate.toString()}
+                                    variant="outline"
+                                    isInvalid={formik.touched.endDate && Boolean(formik.errors.endDate)}
+                                    onBlur={formik.handleBlur}
+                                    pl="3"
+
+                                />
+                                {formik.touched.endDate && formik.errors.endDate && <Text color="red.400" fontSize={12} >end date is required.</Text>}
+                            </Flex>
+                        </Flex>
+                        <Flex flexDirection="column" w="100%">
+                            <FormLabel fontWeight="700" mb="1" mt="5">
+                                Description
+                            </FormLabel>
+                            <Textarea
+                                pr="4.5rem"
+                                name="desc"
+                                value={formik.values?.desc.toString()}
+                                onChange={formik.handleChange}
+                                placeholder="Enter description"
+                                onBlur={formik.handleBlur}
+                                isInvalid={formik.touched.desc && Boolean(formik.errors.desc)}
+                                variant="outline"
+                                pl="3"
+                                size='md'
+                                h="200px"
+                            />
+                            {formik.touched.desc && formik.errors.desc && <Text color="red.400" fontSize={12} >description is required.</Text>}
+                        </Flex>
+                        <Button colorScheme="blue" mt="10" mb="2" w="25%" ml="auto" type="submit">
+                            Create Sprint
+                        </Button>
+                    </FormControl>
+                </Container>
+            </form>
         </Flex>
     )
 }

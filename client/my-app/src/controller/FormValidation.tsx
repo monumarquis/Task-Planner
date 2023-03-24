@@ -16,5 +16,11 @@ const TaskvalidationSchema = object({
     desc: string().min(2, 'Too Short!').max(250, 'Too Long!').required('Please Enter Desc'),
     assignTo: string().min(2, 'Too Short!').max(50, 'Too Long!').required('Please Enter Select assignee'),
 });
+const sprintvalidationSchema = object({
+    title: string().min(4, 'Too Short!').max(25).required("Please Enter Task Title"),
+    endDate: string().required('Please Select Start date'),
+    desc: string().min(2, 'Too Short!').max(250, 'Too Long!').required('Please Enter Desc'),
+    startDate: string().required('Please Select Start date'),
+});
 
-export { SingupvalidationSchema, LoginvalidationSchema, TaskvalidationSchema }
+export { SingupvalidationSchema, LoginvalidationSchema, TaskvalidationSchema, sprintvalidationSchema }

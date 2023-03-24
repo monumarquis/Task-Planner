@@ -32,6 +32,12 @@ export type taskAssign = {
   desc: string;
   sprint: string;
 };
+export type sprintAssign = {
+  title: string;
+  desc: string;
+  startDate: string;
+  endDate: string;
+};
 
 export type SingupProps = { ToggleForm: () => any };
 
