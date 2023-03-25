@@ -3,13 +3,26 @@ const { userPrivateRoute } = require('../middlewares/user.auth')
 const app = express.Router()
 const taskModel = require('../models/task.model')
 
-// All Task of a user
 
+//  Delete Task Route
+app.delete('/:id', userPrivateRoute, async (req, res) => {
+    let { id } = req.params
+    console.log(id);
+
+    try {
+        let doc = await taskModel.deleteOne({ _id: id })
+        return res.status(201).send({ doc, message: "Your Task Deleted Successfully" });
+    } catch (error) {
+        return res.status(401).send(error);
+    }
+})
+// All Task of a user
 app.get("/all-task", userPrivateRoute, async (req, res) => {
     const myTask = await taskModel.find();
     return res.status(201).send({ myTask })
 })
 
+// All task 
 app.get("/", userPrivateRoute, async (req, res) => {
     console.log(req.body.user);
     const myTask = await taskModel.find({ assignBy: req.body.user.email });

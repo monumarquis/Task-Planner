@@ -14,6 +14,7 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import { FormikHelpers, FormikProps } from 'formik/dist/types';
 import { FC, useCallback, useEffect, useState } from 'react'
+import { AiFillExclamationCircle } from 'react-icons/ai';
 import { TaskvalidationSchema } from '../controller/FormValidation';
 import { getAllUserProfile } from '../redux/allUser/allUsers.actions';
 import { getAllSprint } from '../redux/sprint/sprint.actions';
@@ -83,6 +84,10 @@ const AssignTasks: FC = () => {
         <Flex flexDirection="column" w="80%" ml="auto"  >
             <Text as='em' textAlign={"center"} fontSize="25" mt="5" mb="2" >Assign Task</Text>
             <Divider orientation='horizontal' borderColor={'#000'} borderWidth="1px" w="95%" m="auto" mb="5" />
+            <Flex flexDirection="row" alignItems={"center"} p="2" bg="#c4e6f5" border="1px solid #c4e6f5 " w="90%" m="auto" >
+                <AiFillExclamationCircle color='#30a8db' fontSize={"25"} />
+                <Text fontSize="18" ml="5" >All Input Feilds are Mandotary</Text>
+            </Flex>
             <form onSubmit={formik.handleSubmit} style={{ width: "90%", margin: "auto", marginTop: "20px" }} >
                 <Container
                     maxW="100%"

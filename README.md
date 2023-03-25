@@ -77,7 +77,9 @@ It’s Individual AssignMent where I've used MERN stack to make the Task Planner
 - All User DashBoard
 - All Users Data
 - Can Delete User From DB
+- Can Delete Sprint From DB with all task
 - Can Edit role of user  to DB
+- Search User by their name
 
  
 ## 🚀 User Features
@@ -88,6 +90,7 @@ It’s Individual AssignMent where I've used MERN stack to make the Task Planner
 - Can Assign Task to any User 
 - Can Create sprint 
 - Can Edit status of task & assignee 
+- Can Delete the task 
 
 <br />
 

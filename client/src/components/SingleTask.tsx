@@ -7,9 +7,15 @@ import {
     ModalBody,
     ModalCloseButton,
     FormLabel,
-    Input,
     FormControl,
     Select,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverHeader,
+    PopoverBody,
+    PopoverArrow,
+    PopoverCloseButton,
 
 } from '@chakra-ui/react'
 import { FC, useState, useRef, useEffect, ChangeEvent } from 'react'
@@ -20,12 +26,14 @@ import { useLocation } from 'react-router-dom'
 import axios from 'axios'
 import { getAllMyTask } from '../redux/myTask/myTask.actions'
 import { getAllUserProfile } from '../redux/allUser/allUsers.actions'
+import { RiDeleteBin2Fill } from 'react-icons/ri'
 
 const SingleTask: FC<singletaskProps> = ({ data }) => {
     const { data: allusers } = useAppSelector((state) => state.allUser)
     const [isShow, setShow] = useState<boolean>(false)
     const [assignTo, setAssignTo] = useState<string>("")
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const { isOpen: isOpen1, onOpen: onOpen1, onClose: onClose1 } = useDisclosure()
     const initialRef = useRef(null)
     const finalRef = useRef(null)
     const dispatch = useAppDispatch()
@@ -88,6 +96,32 @@ const SingleTask: FC<singletaskProps> = ({ data }) => {
         }
     }
 
+    const handleDeleteTask = async (): Promise<any> => {
+        try {
+            const config = {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            }
+            let res = await axios.delete(`https://real-lime-cockroach-tutu.cyclic.app/task/${data._id}`, config)
+            toast({
+                title: 'Task Deleted',
+                description: "You've Deleted Task Successfully",
+                status: 'success',
+                duration: 2000,
+                isClosable: true,
+            })
+            dispatch(getAllMyTask())
+        } catch {
+            toast({
+                title: 'Something went wrong',
+                description: "Something went wrong",
+                status: 'error',
+                duration: 2000,
+                isClosable: true,
+            });
+        }
+    }
     const handlechange = (e: ChangeEvent<HTMLSelectElement>) => {
         setAssignTo(e.target.value)
     }
@@ -113,9 +147,29 @@ const SingleTask: FC<singletaskProps> = ({ data }) => {
                         <Text fontSize={"14"} color={"#000"} fontWeight={"400"}  >Assign by {" "}{data.assignBy}</Text>
                         <Text fontSize={"14"} color={"#000"} fontWeight={"400"}  >Assign to {" "}{data.assignTo}</Text>
                     </Flex>
-                    {location.pathname === "/tasks" ? <Flex flexDir={"row"}  >
+                    {location.pathname === "/tasks" ? <Flex flexDir={"row"} alignItems="center"  >
                         {data.status !== "Completed" ? <Button colorScheme={"blue"} onClick={handleStatus} >Mark Done</Button> : <Text color={"#000"} fontWeight="400" >Status : {data.status}</Text>}
-                        <Button ml="5" disabled={data.status !== "Completed"} colorScheme={"green"} onClick={onOpen} >Change Assignee</Button>
+                        <Button mx="5" disabled={data.status !== "Completed"} colorScheme={"green"} onClick={onOpen} >Change Assignee</Button>
+                        <Popover
+                            placement='left'
+                            isOpen={isOpen1}
+                            onOpen={onOpen1}
+                            onClose={onClose1}
+                        >
+                            <PopoverTrigger>
+                                < RiDeleteBin2Fill color="#a8323c" cursor={"pointer"} fontSize="20" />
+                            </PopoverTrigger>
+                            <PopoverContent>
+                                <PopoverArrow />
+                                <PopoverCloseButton />
+                                <PopoverHeader>Confirmation!</PopoverHeader>
+                                <PopoverBody>Are you sure you want to Delete this task?</PopoverBody>
+                                <Flex flexDir={"row"} justifyContent="center" alignItems={"center"} my="5" >
+                                    <Button onClick={handleDeleteTask} colorScheme="red" mr="5" >Delete</Button>
+                                    <Button onClick={onClose1} colorScheme="blue" >Cancel</Button>
+                                </Flex>
+                            </PopoverContent>
+                        </Popover>
                     </Flex> : <Text color={"#000"} fontWeight="400" >Status : {data.status}</Text>}
                 </Flex>
                 <Text fontSize={"13"} mt="4" ml="2" color={"#6b6969"} fontWeight={"400"}  >{data.desc}</Text>

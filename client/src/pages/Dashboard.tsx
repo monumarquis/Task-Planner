@@ -1,5 +1,6 @@
 import { Divider, Flex, Text, Spinner } from '@chakra-ui/react'
 import { FC, useEffect } from 'react'
+import { AiFillExclamationCircle } from 'react-icons/ai'
 import SingleSprint from '../components/SingleSprint'
 import { getAllSprint } from '../redux/sprint/sprint.actions'
 import { useAppDispatch, useAppSelector, sprintMapProps } from '../types/user'
@@ -26,6 +27,10 @@ const Dashboard: FC = () => {
         <Flex flexDirection="column" w="80%" ml="auto"  >
             <Text as='em' textAlign={"center"} fontSize="25" mt="5" mb="2" >Veiw Sprint</Text>
             <Divider orientation='horizontal' borderColor={'#000'} borderWidth="1px" w="95%" m="auto" mb="5" />
+            <Flex flexDirection="row" alignItems={"center"} p="2" bg="#c4e6f5" border="1px solid #c4e6f5 " w="90%" m="auto" >
+                <AiFillExclamationCircle color='#30a8db' fontSize={"25"} />
+                <Text fontSize="18" ml="5" >Click on Eye Icons to see all tasks of that sprint</Text>
+            </Flex>
             <Flex flexDirection="column" w="95%" m="auto" mt="10" >
                 {data && data.length > 0 && data.map((el: sprintMapProps) => <SingleSprint data={el} key={el._id} />)}
             </Flex>

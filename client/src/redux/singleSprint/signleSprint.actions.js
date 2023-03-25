@@ -1,9 +1,9 @@
 import axios from "axios";
-import { USER_PROFILE_ERROR, USER_PROFILE_REQUEST, USER_PROFILE_SUCCESS } from "./userProfile.types";
+import { SINGLE_SPRINT_ERROR, SINGLE_SPRINT_REQUEST, SINGLE_SPRINT_SUCCESS } from "./signleSprint.types";
 
-export const getUserProfile = () => async (dispatch) => {
+export const getSingleSprint = (id) => async (dispatch) => {
     dispatch({
-        type: USER_PROFILE_REQUEST
+        type: SINGLE_SPRINT_REQUEST
     });
     const config = {
         headers: {
@@ -11,17 +11,17 @@ export const getUserProfile = () => async (dispatch) => {
         }
     }
     try {
-        const { data } = await axios.get(`https://real-lime-cockroach-tutu.cyclic.app/user/getProfile`,config);
+        const { data } = await axios.get(`https://real-lime-cockroach-tutu.cyclic.app/sprint/${id}`, config);
         // console.log(data);
-          return dispatch({
-            type: USER_PROFILE_SUCCESS,
+        return dispatch({
+            type: SINGLE_SPRINT_SUCCESS,
             payload: data,
         });
     }
     catch ({ response: { data: { message } } }) {
         console.log(message);
         return dispatch({
-            type: USER_PROFILE_ERROR,
+            type: SINGLE_SPRINT_ERROR,
             payload: message,
         });
 
