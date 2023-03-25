@@ -11,9 +11,9 @@ app.get("/", userPrivateRoute, async (req, res) => {
     return res.status(201).send({ myTask, assignedtask })
 })
 
-app.get("/allSprint", userPrivateRoute, async (req, res) => {
+app.get("/allSprint/:sprint", userPrivateRoute, async (req, res) => {
     console.log(req.body.user);
-    const { sprint } = req.body
+    const { sprint } = req.params
     const myTask = await taskModel.find({ sprint });
     return res.status(201).send(myTask)
 })

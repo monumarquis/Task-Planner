@@ -63,6 +63,7 @@ export type taskMapProps = {
 };
 
 export type singletaskProps = { data: taskMapProps };
+export type singlesprintProps = { data: sprintMapProps };
 
 export type userMapProps = {
   _id: string;
