@@ -35,7 +35,7 @@ const AssignSprints: FC = () => {
         }
         try {
             console.log(values)
-            let { data } = await axios.post("http://localhost:8001/sprint", { ...values }, config)
+            let { data } = await axios.post("https://real-lime-cockroach-tutu.cyclic.app/sprint", { ...values }, config)
             toast({
                 title: data.message,
                 description: "You've Added New Sprint",

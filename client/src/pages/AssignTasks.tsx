@@ -43,7 +43,7 @@ const AssignTasks: FC = () => {
         }
         try {
             console.log(values)
-            let { data } = await axios.post("http://localhost:8001/task", { ...values }, config)
+            let { data } = await axios.post("https://real-lime-cockroach-tutu.cyclic.app/task", { ...values }, config)
             toast({
                 title: data.message,
                 description: "You've created Task",

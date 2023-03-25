@@ -28,13 +28,26 @@ const AllUser: FC = () => {
     }, [])
 
     useEffect(() => {
-        dispatch(getAllUserProfileBySearch(name))
+        if (name === "") dispatch(getAllUserProfile())
+        else dispatch(getAllUserProfileBySearch(name))
     }, [name])
     const handlesearch = (e: ChangeEvent<HTMLInputElement>) => {
         setUser(e.target.value)
     }
+
+    if (loading) {
+        return <Flex flexDirection="column" w="80%" ml="auto" px="10" mt="20" justifyContent={"center"} alignItems="center" >
+            <Spinner
+                thickness='4px'
+                speed='0.65s'
+                emptyColor='gray.200'
+                color='blue.500'
+                size='xl'
+            />
+        </Flex>
+    }
     return (
-        <Flex flexDirection="column"  w="80%" ml="auto" px="10" >
+        <Flex flexDirection="column" w="80%" ml="auto" px="10" >
             <Input type="text" w="30%" ml="10" placeholder='Search by name' value={name} onChange={handlesearch} my="10" />
             <TableContainer  >
                 <Table variant='striped' colorScheme='grey'>
@@ -48,7 +61,7 @@ const AllUser: FC = () => {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {data && data.length > 0 && data.map((el:mapUserProps): any => <SingleTableUser key={el._id} id={el._id} name={el.name}
+                        {data && data.length > 0 && data.map((el: mapUserProps): any => <SingleTableUser key={el._id} id={el._id} name={el.name}
                             role={el.role} email={el.email}
                         />)}
 
