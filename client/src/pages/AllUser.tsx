@@ -9,6 +9,7 @@ import {
     Td,
     TableCaption,
     TableContainer,
+    Divider, Text,
     Spinner,
     Flex,
     Input,
@@ -48,6 +49,8 @@ const AllUser: FC = () => {
     }
     return (
         <Flex flexDirection="column" w="80%" ml="auto" px="10" >
+            <Text as='em' textAlign={"center"} fontSize="25" mt="5" mb="2" >Veiw User's </Text>
+            <Divider orientation='horizontal' borderColor={'#000'} borderWidth="1px" w="95%" m="auto" mb="5" />
             <Input type="text" w="30%" ml="10" placeholder='Search by name' value={name} onChange={handlesearch} my="10" />
             <TableContainer  >
                 <Table variant='striped' colorScheme='grey'>

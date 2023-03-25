@@ -1,4 +1,4 @@
-import { Flex, Tabs, TabList, TabPanels, Tab, TabPanel, Spinner } from '@chakra-ui/react'
+import { Flex, Tabs, TabList, TabPanels, Tab, TabPanel, Spinner,Text,Divider } from '@chakra-ui/react'
 import { FC, useEffect } from 'react'
 import SingleTask from '../components/SingleTask'
 import { getAllMyTask } from '../redux/myTask/myTask.actions'
@@ -25,6 +25,8 @@ const Tasks: FC = () => {
     }
     return (
         <Flex flexDirection="column" w="80%" ml="auto" >
+             <Text as='em' textAlign={"center"} fontSize="25" mt="5" mb="2" >Veiw Tasks</Text>
+            <Divider orientation='horizontal' borderColor={'#000'} borderWidth="1px" w="95%" m="auto" mb="5" />
             <Tabs isFitted variant='enclosed' w="95%" m="auto" mt="10" >
                 <TabList>
                     <Tab _selected={{ color: 'white', bg: 'blue.500', fontsize: "30", fontWeight: "500" }}>My Task</Tab>

@@ -2,10 +2,10 @@ import {
     Flex, Table,
     Thead,
     Tbody,
-    Tfoot,
+    Divider,
+    Text,
     Tr,
     Th,
-    Td,
     TableCaption,
     TableContainer,
     Spinner,
@@ -13,7 +13,6 @@ import {
 import { FC, useEffect } from 'react'
 import SingleReport from '../components/SingleReport'
 import { getAllSprint } from '../redux/sprint/sprint.actions'
-import { getUserProfile } from '../redux/userProfile/userProfile.actions'
 import { sprintMapProps, useAppDispatch, useAppSelector } from '../types/user'
 
 const Report: FC = () => {
@@ -35,6 +34,8 @@ const Report: FC = () => {
     }
     return (
         <Flex flexDirection="column" w="80%" ml="auto"  >
+            <Text as='em' textAlign={"center"} fontSize="25" mt="5" mb="2" >Veiw Report</Text>
+            <Divider orientation='horizontal' borderColor={'#000'} borderWidth="1px" w="95%" m="auto" mb="5" />
             <TableContainer>
                 <Table variant='striped' colorScheme='teal' w="95%" m="auto" >
                     <TableCaption>All Sprint Reports comes from backend </TableCaption>

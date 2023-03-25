@@ -6,6 +6,7 @@ import { MdAddTask } from 'react-icons/md'
 import { VscTasklist } from 'react-icons/vsc'
 import { CgExtensionAdd } from 'react-icons/cg'
 import { GiSprint } from 'react-icons/gi'
+import { FaUsers } from 'react-icons/fa'
 import { useAppDispatch, useAppSelector } from '../types/user'
 import { LogOut } from '../redux/auth/auth.actions'
 import { getUserProfile } from '../redux/userProfile/userProfile.actions'
@@ -57,7 +58,7 @@ const Sidebar: FC = () => {
         <NavLink to="/report" style={{ marginLeft: "25px", color: "#fff" }}>Report</NavLink>
       </Flex>
       {role === 'admin' && <Flex w="50%" id="tab" flexDirection="row" alignItems="center" mb="10" >
-        <TbReport color='#fff' fontSize={"25px"} />
+        <FaUsers color='#fff' fontSize={"25px"} />
         <NavLink to="/all-users" style={{ marginLeft: "25px", color: "#fff" }}>Users</NavLink>
       </Flex>}
       {/* {role === 'admin' && <Flex w="50%" id="tab" flexDirection="row" alignItems="center" mb="10" >

@@ -7,6 +7,7 @@ import {
     Select,
     Textarea,
     useToast,
+    Divider
 } from '@chakra-ui/react'
 import axios from 'axios';
 
@@ -80,6 +81,8 @@ const AssignTasks: FC = () => {
     });
     return (
         <Flex flexDirection="column" w="80%" ml="auto"  >
+            <Text as='em' textAlign={"center"} fontSize="25" mt="5" mb="2" >Assign Task</Text>
+            <Divider orientation='horizontal' borderColor={'#000'} borderWidth="1px" w="95%" m="auto" mb="5" />
             <form onSubmit={formik.handleSubmit} style={{ width: "90%", margin: "auto", marginTop: "20px" }} >
                 <Container
                     maxW="100%"

@@ -1,4 +1,4 @@
-import { Divider, Flex, Heading, Spinner } from '@chakra-ui/react'
+import { Divider, Flex, Text, Spinner } from '@chakra-ui/react'
 import { FC, useEffect } from 'react'
 import SingleSprint from '../components/SingleSprint'
 import { getAllSprint } from '../redux/sprint/sprint.actions'
@@ -24,8 +24,8 @@ const Dashboard: FC = () => {
     }
     return (
         <Flex flexDirection="column" w="80%" ml="auto"  >
-            <Heading as="h2" textAlign={"left"} ml="6"  >Veiw Sprints</Heading>
-            <Divider orientation='horizontal' borderColor={'#000'} borderWidth="1px" w="95%" m="auto" my="2" />
+            <Text as='em' textAlign={"center"} fontSize="25" mt="5" mb="2" >Veiw Sprint</Text>
+            <Divider orientation='horizontal' borderColor={'#000'} borderWidth="1px" w="95%" m="auto" mb="5" />
             <Flex flexDirection="column" w="95%" m="auto" mt="10" >
                 {data && data.length > 0 && data.map((el: sprintMapProps) => <SingleSprint data={el} key={el._id} />)}
             </Flex>
