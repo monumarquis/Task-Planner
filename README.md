@@ -65,9 +65,16 @@ It’s Individual AssignMent where I've used MERN stack to make the Task Planner
 <br />
 <br />
 
+## 🚀 Important Note
+- This is My backend Deploy link https://real-lime-cockroach-tutu.cyclic.app/ You should check this link if it is working or not  before going live 
+
+
+## 🚀 Admin Credentails
+- email: admin@gmail.com
+- password: 12345
 
 ## 🚀 Admin Features
-- All User DAshBoard
+- All User DashBoard
 - All Users Data
 - Can Delete User From DB
 - Can Edit role of user  to DB
@@ -138,8 +145,8 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ## Contact
 
 If you want to contact me, you can reach me through below handles. <br />
-[![linkedin](https://img.shields.io/badge/Sufiyan_Shaikh-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/monu-yadav-2003m/)
-[![GitHub](https://img.shields.io/badge/Sufiyan_Shaikh-20232A?style=for-the-badge&logo=Github&logoColor=white)](https://github.com/monumarquis)
+[![linkedin](https://img.shields.io/badge/Monu_Yadav-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/monu-yadav-2003m/)
+[![GitHub](https://img.shields.io/badge/Monu_Yadav-20232A?style=for-the-badge&logo=Github&logoColor=white)](https://github.com/monumarquis)
 
 
 
