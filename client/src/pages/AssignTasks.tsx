@@ -107,8 +107,6 @@ const AssignTasks: FC = () => {
                                     Assignee
                                 </FormLabel>
                                 <Select name="assignTo" variant="outline" placeholder='Select Assignee' value={formik.values?.assignTo.toString()} onBlur={formik.handleBlur} onChange={formik.handleChange} >
-                                    {/* <option value='option1'>Option 1</option>
-                                    <option value='option2'>Option 2</option> */}
                                     {
                                         allusers && allusers.length > 0 && allusers.map((el: userMapProps) => <option value={el.email}>{el.email}</option>)
                                     }

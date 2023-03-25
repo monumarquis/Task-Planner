@@ -30,13 +30,11 @@ const SingleSprintPage: FC = () => {
         </Flex>
     }
     return (
-        <Flex flexDirection="column" w="80%" ml="auto">
-            {/* <SingleSprint data={x} /> */}
+        <Flex flexDirection="column" w="80%" ml="auto" px="10">
             {data && data.length === 0 ? <Text>Task Not Found</Text> : <Flex flexDir={"column"} justifyContent="space-between" w="100%" >
                 <Text fontWeight={"500"} fontSize="20" textAlign={"center"} my="5" >All Tasks</Text>
                 {data.map((el: taskMapProps) => <SingleTask data={el} key={el._id} />)}
             </Flex>}
-
         </Flex>
     )
 }

@@ -40,7 +40,7 @@ const SingleTask: FC<singletaskProps> = ({ data }) => {
                     authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             }
-            let res = await axios.patch(`http://localhost:8001/task/update-status`, { taskId: data._id }, config)
+            let res = await axios.patch(`https://real-lime-cockroach-tutu.cyclic.app/task/update-status`, { taskId: data._id }, config)
             toast({
                 title: 'Congratulation task is done !',
                 description: "You've marked this task as done",
@@ -68,7 +68,7 @@ const SingleTask: FC<singletaskProps> = ({ data }) => {
                     authorization: `Bearer ${localStorage.getItem("token")}`
                 }
             }
-            let res = await axios.patch(`http://localhost:8001/task/update-assignee`, { taskId: data._id, assignTo }, config)
+            let res = await axios.patch(`https://real-lime-cockroach-tutu.cyclic.app/task/update-assignee`, { taskId: data._id, assignTo }, config)
             toast({
                 title: 'Changed Assignee',
                 description: "You've changed assignee for this task ",
