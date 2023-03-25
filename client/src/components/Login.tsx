@@ -11,6 +11,7 @@ import { FormikHelpers, FormikProps } from 'formik/dist/types';
 import { FC, useCallback, useState } from 'react'
 import { LoginvalidationSchema } from '../controller/FormValidation';
 import { LogIn } from '../redux/auth/auth.actions';
+import { getUserProfile } from '../redux/userProfile/userProfile.actions';
 import { SingupProps, LoginUserState, useAppDispatch } from '../types/user';
 
 const initState: LoginUserState = {

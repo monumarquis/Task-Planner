@@ -1,6 +1,6 @@
 import { USER_PROFILE_ERROR, USER_PROFILE_REQUEST, USER_PROFILE_SUCCESS } from "./userProfile.types";
 const initState = {
-    data: {},
+    data: null,
     loading: false,
     error: false
 };
@@ -21,7 +21,7 @@ export const UserProfileReducer = (
 
             return {
                 ...state,
-                data: {},
+                data: null,
                 loading: true,
                 error: false
             };
@@ -30,7 +30,7 @@ export const UserProfileReducer = (
 
             return {
                 ...state,
-                data: {},
+                data: null,
                 loading: false,
                 error: true
             };

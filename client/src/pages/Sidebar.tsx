@@ -13,12 +13,15 @@ import { getUserProfile } from '../redux/userProfile/userProfile.actions'
 
 const Sidebar: FC = () => {
   const { isAuth, role } = useAppSelector((state) => state.auth)
-  const { data } = useAppSelector((state) => state.userProfile)
+  const { data, loading } = useAppSelector((state) => state.userProfile)
+  console.log(data, "user")
   const dispatch = useAppDispatch()
   const toast = useToast()
   useEffect(() => {
-    dispatch(getUserProfile())
-  }, [])
+    if (isAuth  && localStorage.getItem("token")) {
+      dispatch(getUserProfile())
+    }
+  }, [isAuth])
 
   const handlelogout = (): void => {
     dispatch(LogOut())
@@ -34,8 +37,8 @@ const Sidebar: FC = () => {
     <Flex display={isAuth ? "flex" : "none"} pl="10px" flexDirection="column" bg="#545154" w="20%" h="100vh" pos={"fixed"} top="0" left="0" >
 
       <Flex id="tab" flexDirection="row" alignItems="center" my="10" >
-        <Avatar name={data.name} src='https://bit.ly/broken-link' />
-        <Text ml="5" color={"#fff"} fontSize="20" >{data.name}</Text>
+        <Avatar name={data && !loading ? data.name : "Monu Yadav"} src='https://bit.ly/broken-link' />
+        <Text ml="5" color={"#fff"} fontSize="20" >{data && !loading ? data.name : ""}</Text>
       </Flex>
       <Flex id="tab" flexDirection="row" alignItems="center" mb="10" >
         <GiSprint color='#fff' fontSize={"25px"} />
@@ -66,7 +69,7 @@ const Sidebar: FC = () => {
         <NavLink to="/report" style={{ marginLeft: "25px", color: "#fff" }}>Add User</NavLink>
       </Flex>} */}
       <Flex id="tab" flexDirection="row" alignItems="center" mb="10">
-        <Avatar name={data.name} src='https://bit.ly/broken-link' size={"sm"} />
+        <Avatar name={data && !loading ? data.name : "Monu Yadav"} src='https://bit.ly/broken-link' size={"sm"} />
         <Text ml="5" color={"#fff"} fontSize="16" cursor={"pointer"} onClick={handlelogout} >Logout</Text>
       </Flex>
     </Flex>
