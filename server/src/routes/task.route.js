@@ -10,13 +10,45 @@ app.get("/", userPrivateRoute, async (req, res) => {
     const assignedtask = await taskModel.find({ assignTo: req.body.user.email });
     return res.status(201).send({ myTask, assignedtask })
 })
+
 app.get("/allSprint", userPrivateRoute, async (req, res) => {
     console.log(req.body.user);
-    const myTask = await taskModel.find();
-
+    const { sprint } = req.body
+    const myTask = await taskModel.find({ sprint });
     return res.status(201).send(myTask)
 })
 
+// change assignee 
+app.patch('/update-assignee', userPrivateRoute, async (req, res) => {
+    let { user, assignTo, taskId } = req.body
+    console.log(user, assignTo, taskId);
+
+    try {
+        let doc = await taskModel.findOneAndUpdate({ _id: taskId }, { $set: { assignTo: assignTo } }, {
+            new: true
+        });
+        console.log(doc);
+        return res.status(201).send({ user: doc, message: "Your Informtion Updated Successfully" });
+    } catch (error) {
+        return res.status(401).send(error);
+    }
+})
+
+// update status
+app.patch('/update-status', userPrivateRoute, async (req, res) => {
+    let { user, taskId } = req.body
+    console.log(user, taskId);
+
+    try {
+        let doc = await taskModel.findOneAndUpdate({ _id: taskId }, { $set: { status: "completed" } }, {
+            new: true
+        });
+        console.log(doc);
+        return res.status(201).send({ user: doc, message: "Your Informtion Updated Successfully" });
+    } catch (error) {
+        return res.status(401).send(error);
+    }
+})
 
 app.post("/", userPrivateRoute, async (req, res) => {
     // console.log(req.body.user);
