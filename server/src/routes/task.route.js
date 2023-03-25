@@ -4,6 +4,12 @@ const app = express.Router()
 const taskModel = require('../models/task.model')
 
 // All Task of a user
+
+app.get("/all-task", userPrivateRoute, async (req, res) => {
+    const myTask = await taskModel.find();
+    return res.status(201).send({ myTask })
+})
+
 app.get("/", userPrivateRoute, async (req, res) => {
     console.log(req.body.user);
     const myTask = await taskModel.find({ assignBy: req.body.user.email });
@@ -11,6 +17,7 @@ app.get("/", userPrivateRoute, async (req, res) => {
     return res.status(201).send({ myTask, assignedtask })
 })
 
+// Individual Sprint Task Routes
 app.get("/allSprint/:sprint", userPrivateRoute, async (req, res) => {
     console.log(req.body.user);
     const { sprint } = req.params
@@ -40,7 +47,7 @@ app.patch('/update-status', userPrivateRoute, async (req, res) => {
     console.log(user, taskId);
 
     try {
-        let doc = await taskModel.findOneAndUpdate({ _id: taskId }, { $set: { status: "completed" } }, {
+        let doc = await taskModel.findOneAndUpdate({ _id: taskId }, { $set: { status: "Completed" } }, {
             new: true
         });
         console.log(doc);

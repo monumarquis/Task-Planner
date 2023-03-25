@@ -13,6 +13,7 @@ import {
 import { FC, useEffect } from 'react'
 import SingleReport from '../components/SingleReport'
 import { getAllSprint } from '../redux/sprint/sprint.actions'
+import { getUserProfile } from '../redux/userProfile/userProfile.actions'
 import { sprintMapProps, useAppDispatch, useAppSelector } from '../types/user'
 
 const Report: FC = () => {
@@ -40,8 +41,8 @@ const Report: FC = () => {
                     <Thead>
                         <Tr>
                             <Th>Sprint</Th>
-                            <Th isNumeric>Task</Th>
-                            <Th isNumeric>Completed Task</Th>
+                            <Th>Task</Th>
+                            <Th>Completed Task</Th>
                             <Th>Work Duration</Th>
                             <Th>Progress</Th>
                         </Tr>

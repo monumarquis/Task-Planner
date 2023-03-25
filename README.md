@@ -59,7 +59,7 @@
   <a href="#Contact">Author</a> &#10023;
 </p>
 
-It’s Individual AssignMent where we've used MERN stack to make the Task Planner with our creativity along with frontend , backend,
+It’s Individual AssignMent where I've used MERN stack to make the Task Planner with our creativity along with frontend & backend.
 
 
 <br />
@@ -70,7 +70,7 @@ It’s Individual AssignMent where we've used MERN stack to make the Task Planne
 - All User DAshBoard
 - All Users Data
 - Can Delete User From DB
-- Can Edut role of user  to DB
+- Can Edit role of user  to DB
 
  
 ## 🚀 User Features

@@ -5,11 +5,13 @@ import {
     compose
 } from "redux";
 import thunk from "redux-thunk";
+import { allTaskReducer } from "./allTask/allTask.reducer";
 import { allUserProfileReducer } from "./allUser/allUsers.reducer";
 import { authReducer } from "./auth/auth.reducer";
 import { myTaskReducer } from "./myTask/myTask.reducer";
 import { allSprintReducer } from "./sprint/sprint.reducer";
 import { allSprintTaskReducer } from "./sprintTask/sprintTask.reducer";
+import { UserProfileReducer } from "./userProfile/userProfile.reducer";
 
 
 const rootReducer = combineReducers({
@@ -17,7 +19,9 @@ const rootReducer = combineReducers({
     allUser: allUserProfileReducer,
     allSprints: allSprintReducer,
     allMyTasks: myTaskReducer,
-    allSprintTask: allSprintTaskReducer
+    allSprintTask: allSprintTaskReducer,
+    allTask: allTaskReducer,
+    userProfile: UserProfileReducer
 });
 
 const createCompose = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

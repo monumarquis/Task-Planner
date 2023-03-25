@@ -1,3 +1,3 @@
-export const MY_TASK_REQUEST = "myTask/myTaskProfileRequest";
-export const MY_TASK_SUCCESS = "myTask/myTaskProfileRequestProfileSuccess";
-export const MY_TASK_ERROR = "myTask/myTaskProfileError";
+export const MY_TASK_REQUEST = "myTask/myTaskRequest";
+export const MY_TASK_SUCCESS = "myTask/myTaskSuccess";
+export const MY_TASK_ERROR = "myTask/myTaskError";

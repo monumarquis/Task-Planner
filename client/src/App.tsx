@@ -1,5 +1,5 @@
 import { Flex } from '@chakra-ui/react';
-import AllRoutes from './AllRoutes/Allroutes';
+import AllRoutes from './allRoutes/Allroutes';
 import './App.css';
 import Sidebar from './pages/Sidebar';
 import { useAppSelector } from './types/user';
