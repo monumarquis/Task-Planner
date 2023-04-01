@@ -4,8 +4,19 @@
 <h3 align="center">It's a MERN Stack Task Planner web application with all the major functionalities</h3>
 
 <br />
+<img src="https://data.bloggif.com/distant/user/store/d/3/3/c/796cd831051dc11c2e8f9f00abdbc33d.gif" width="800px" />
+
+## Screens 
+- Homepage / Landing Page
+- Add Task & Sprint Page
+- My Task Page
+- Report Page
+- Login / Signup Page
+- Single Sprint Page
+- All User Dashboard
 
 
+<br /> 
 <h2 align="center">🖥️ Tech Stack</h2>
 
 
@@ -68,11 +79,6 @@ It’s Individual AssignMent where I've used MERN stack to make the Task Planner
 ## 🚀 Important Note
 - This is My backend Deploy link https://real-lime-cockroach-tutu.cyclic.app/ You should check this link if it is working or not  before going live because sometimes server goes down then it stops for working for sometime.
 
-
-## 🚀 Admin Credentails
-- email: admin@gmail.com
-- password: 12345
-
 ## 🚀 Admin Features
 - All User DashBoard
 - All Users Data
@@ -96,6 +102,35 @@ It’s Individual AssignMent where I've used MERN stack to make the Task Planner
 
 <br />
 
+## Glimpses of Task-Palnner.com 🙈 :
+
+
+
+
+<table>
+  <tr>
+    <td><img src="https://i.ibb.co/TW8dyc9/Login.png"  alt="Login" /></td>
+    <td><img  src="https://i.ibb.co/YPZrx0w/signup.png"  alt="signup" /></td>
+  </tr>
+  <tr>
+   <td><img src="https://i.ibb.co/RSBJYSk/add.png"  alt="add" /></td>
+    <td><img src="https://i.ibb.co/wLxf8Qd/report.png"  alt="report" /></td>
+  </tr>
+  <tr>
+    <td><img src="https://i.ibb.co/PMbng6X/assign.png" alt="assign" /></td>
+    <td><img src="https://i.ibb.co/sy1Y9HW/signle.png"  alt="single" /></td>
+  </tr>
+  <tr>
+    <td><img src="https://i.ibb.co/4dvkzwm/task.png"  alt="task" /></td>
+    <td><img src="https://i.ibb.co/8gw8x3r/user.png"  alt="user" /></td>
+  </tr>
+   <tr>
+    <td><img src="https://i.ibb.co/nwwYfVj/dash.png"   alt="dash" /></td>
+   
+  </tr>
+</table>
+
+<br />
 
 
 ## Getting Started
